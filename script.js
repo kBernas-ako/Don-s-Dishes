@@ -213,7 +213,7 @@ function createItemEl(ci, ii, item) {
       (item.description ? '<span class="item-desc">' + escapeHtml(item.description) + '</span>' : '') +
     '</div>' +
     '<span class="dots"></span>' +
-    '<span class="item-price">&#8369;' + item.price + '</span>';
+    '<span class="item-price">₱' + item.price + '</span>';
 
   const open = () => openItemModal(ci, ii);
   li.addEventListener('click', open);
@@ -237,7 +237,7 @@ function openItemModal(ci, ii) {
     img.hidden = true;
   }
   document.getElementById('detailName').textContent = item.name;
-  document.getElementById('detailPrice').textContent = '&#8369;' + item.price;
+  document.getElementById('detailPrice').textContent = '₱' + item.price;
   document.getElementById('detailDesc').textContent = item.description || 'No description added yet.';
   document.getElementById('itemModal').hidden = false;
   document.body.style.overflow = 'hidden';
@@ -397,7 +397,7 @@ function createAdminRow(ci, ii, item) {
       : '<span class="admin-thumb placeholder">' + escapeHtml(item.name.charAt(0)) + '</span>') +
     '<div class="admin-info">' +
       '<div class="admin-name">' + escapeHtml(item.name) + '</div>' +
-      '<div class="admin-meta">&#8369;' + item.price + '</div>' +
+      '<div class="admin-meta">₱' + item.price + '</div>' +
     '</div>' +
     '<button type="button" class="mini-btn" data-action="edit" data-ci="' + ci + '" data-ii="' + ii + '">Edit</button>' +
     '<button type="button" class="mini-btn danger" data-action="delete" data-ci="' + ci + '" data-ii="' + ii + '">Delete</button>';
