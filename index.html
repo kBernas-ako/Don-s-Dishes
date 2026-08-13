@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Don's Dishes - Lutong bahay, Monday to Saturday in Magarao, Camarines Sur."
+    />
+    <title>Don's Dishes | Luto ini kang Papa ko</title>
+    <!-- Google Fonts: Inter & Outfit for clean readability -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- TOP HEADER / NAV -->
+    <header class="header">
+      <div class="container header-container">
+        <a href="#home" class="logo">
+          <span class="logo-text">DON'S DISHES</span>
+        </a>
+        <nav class="nav">
+          <a href="#home" class="nav-link active">Home</a>
+          <a href="#menu" class="nav-link">Menu</a>
+          <a href="#about" class="nav-link">About</a>
+          <a href="#location" class="nav-link">Location</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- 1. HOME SECTION -->
+      <section id="home" class="section home-section">
+        <div class="container text-center">
+          <h1 class="brand-title">DON'S KARINDERYA</h1>
+          <p class="tagline">Mga masiram na Luto ni Papa Don</p>
+
+          <!-- Stall / Food Photo -->
+          <div class="photo-wrapper">
+            <!--PRIORITY 1- Got to change the pricture-->
+            <img
+              src="Don-karinderya.png"
+              alt="Dons's Karinderya Food Stall"
+              class="stall-photo"
+              loading="eager"
+            />
+          </div>
+
+          <div class="action-bar">
+            <a href="#menu" class="btn btn-primary">View Menu</a>
+          </div>
+
+          <div class="location-badge">
+            <span>@ Brgy.San Isidro, Magarao, Camarines Sur</span>
+          </div>
+        </div>
+      </section>
+
+      <hr class="divider" />
+
+      <!-- 2. MENU SECTION -->
+      <section id="menu" class="section menu-section">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title">MENU</h2>
+            <p class="section-subtitle">
+              Araw-araw bagong luto at abot-kayang pagkain.
+            </p>
+            <div class="menu-toolbar">
+              <span id="lastUpdated" class="last-updated">Today's menu</span>
+              <button
+                id="editMenuBtn"
+                class="btn btn-secondary btn-sm"
+                type="button"
+              >
+                Edit Menu
+              </button>
+            </div>
+          </div>
+
+          <div id="menuBox" class="menu-box"></div>
+
+          <div class="menu-footer-note">
+            <span>Prices may vary depending on daily meat market prices.</span>
+          </div>
+        </div>
+      </section>
+
+      <hr class="divider" />
+
+      <!-- 3. ABOUT SECTION -->
+      <section id="about" class="section about-section">
+        <div class="container text-center">
+          <h2 class="section-title">ABOUT US</h2>
+          <div class="about-card">
+            <p class="about-text">
+              We are a small family-owned karinderya serving affordable Filipino
+              food.
+            </p>
+            <div class="hours-box">
+              <div class="hours-label">OPEN HOURS</div>
+              <div class="hours-val">Monday – Saturday</div>
+              <div class="hours-time">6:00 AM – 7:00 PM</div>
+              <p class="closed-tag">Closed on Sundays</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr class="divider" />
+
+      <!-- 4. LOCATION SECTION -->
+      <section id="location" class="section location-section">
+        <div class="container text-center">
+          <h2 class="section-title">FIND US</h2>
+          <p class="location-address">📍 San Isidro, Magarao</p>
+
+          <div class="map-action">
+            <a
+              href="https://maps.app.goo.gl/9ZgmyzYVv2G1eLaN7"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-secondary"
+            >
+              Google Maps
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- MENU ITEM DETAIL MODAL -->
+    <div id="itemModal" class="modal" hidden>
+      <div class="modal-box item-modal-box">
+        <button
+          id="closeItemModal"
+          class="modal-close"
+          type="button"
+          aria-label="Close"
+        >
+          &times;
+        </button>
+        <img id="detailImage" class="detail-image" alt="" />
+        <h3 id="detailName" class="detail-name"></h3>
+        <span id="detailPrice" class="item-price detail-price"></span>
+        <p id="detailDesc" class="detail-desc"></p>
+      </div>
+    </div>
+
+    <!-- ADMIN LOGIN MODAL -->
+    <div id="loginModal" class="modal" hidden>
+      <div class="modal-box login-box">
+        <button
+          id="closeLoginBtn"
+          class="modal-close"
+          type="button"
+          aria-label="Close"
+        >
+          &times;
+        </button>
+        <div class="modal-head">
+          <h3>Admin Login</h3>
+        </div>
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="loginPass">Password</label>
+            <input
+              id="loginPass"
+              type="password"
+              required
+              autocomplete="current-password"
+              placeholder="Enter admin password"
+            />
+          </div>
+          <p id="loginError" class="login-error" hidden>
+            Incorrect password. Try again.
+          </p>
+          <div class="form-actions">
+            <button class="btn btn-primary" type="submit">Log In</button>
+            <button id="cancelLoginBtn" class="btn btn-secondary" type="button">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- EDIT MENU ADMIN MODAL -->
+    <div id="adminPanel" class="modal" hidden>
+      <div class="modal-box admin-box">
+        <button
+          id="closeAdminBtn"
+          class="modal-close"
+          type="button"
+          aria-label="Close"
+        >
+          &times;
+        </button>
+
+        <div class="modal-head">
+          <h3 id="formTitle">Add New Item</h3>
+        </div>
+
+        <form id="itemForm">
+          <div class="form-group">
+            <label for="categorySelect">Category</label>
+            <select id="categorySelect"></select>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="itemName">Item Name</label>
+              <input
+                id="itemName"
+                type="text"
+                required
+                maxlength="60"
+                placeholder="e.g. Adobo"
+              />
+            </div>
+            <div class="form-group">
+              <label for="itemPrice">Price (&#8369;)</label>
+              <input
+                id="itemPrice"
+                type="number"
+                min="0"
+                step="1"
+                required
+                placeholder="e.g. 50"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="itemDesc">Description</label>
+            <textarea
+              id="itemDesc"
+              rows="2"
+              maxlength="300"
+              placeholder="Short description of the dish..."
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label for="imageInput">Item Photo</label>
+            <input id="imageInput" type="file" accept="image/*" />
+            <div class="image-preview-wrap">
+              <img
+                id="imagePreview"
+                class="image-preview"
+                alt="Preview"
+                hidden
+              />
+              <button
+                id="removeImageBtn"
+                class="mini-btn danger"
+                type="button"
+                hidden
+              >
+                Remove Photo
+              </button>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button id="saveItemBtn" class="btn btn-primary" type="submit">
+              Add Item
+            </button>
+            <button id="cancelEditBtn" class="btn btn-secondary" type="button">
+              Cancel
+            </button>
+          </div>
+        </form>
+
+        <div id="adminItemList" class="admin-list"></div>
+
+        <div class="form-actions admin-bottom">
+          <button
+            id="addCategoryBtn"
+            class="btn btn-secondary btn-sm"
+            type="button"
+          >
+            Add Category
+          </button>
+          <button
+            id="resetMenuBtn"
+            class="btn btn-secondary btn-sm"
+            type="button"
+          >
+            Reset to Default
+          </button>
+          <button id="logoutBtn" class="btn btn-secondary btn-sm" type="button">
+            Log Out
+          </button>
+        </div>
+
+        <div class="pass-box">
+          <h4 class="pass-title">Change Password</h4>
+          <div class="form-group">
+            <label for="curPass">Current Password</label>
+            <input
+              id="curPass"
+              type="password"
+              autocomplete="current-password"
+            />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="newPass">New Password</label>
+              <input id="newPass" type="password" autocomplete="new-password" />
+            </div>
+            <div class="form-group">
+              <label for="confirmPass">Confirm New Password</label>
+              <input
+                id="confirmPass"
+                type="password"
+                autocomplete="new-password"
+              />
+            </div>
+          </div>
+          <div class="form-actions">
+            <button id="changePassBtn" class="mini-btn" type="button">
+              Save New Password
+            </button>
+          </div>
+          <p id="passMsg" class="pass-msg"></p>
+        </div>
+
+        <p class="admin-hint">
+          Changes are saved in this browser. Every menu item shows a photo; tap
+          an item to see its description and bigger picture.
+        </p>
+      </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
+
+<!-- SIMPLE FOOTER -->
+<footer class="footer">
+  <div class="container text-center">
+    <p>© 2021 Don's Dishes • San Isidro, Magarao</p>
+    <p class="footer-sub">Masarap na Affordable pa</p>
+  </div>
+</footer>

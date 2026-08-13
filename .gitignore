@@ -1,0 +1,11 @@
+# Private Configuration & Password Files
+config.js
+.env
+*.env
+*.local.js
+
+# OS & Editor Files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
