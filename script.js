@@ -110,23 +110,16 @@ function fileToDataURL(file) {
 
 // ---------- admin auth ----------
 
-let passHashPromise = null;
-
 function isLoggedIn() {
   return sessionStorage.getItem(SESSION_KEY) === '1';
 }
 
-function ensurePassHash() {
-  if (!passHashPromise) {
-    passHashPromise = (async () => {
-      const stored = localStorage.getItem(ADMIN_PASS_KEY);
-      if (stored) return stored;
-      const h = await hashPassword(DEFAULT_PASSWORD);
-      localStorage.setItem(ADMIN_PASS_KEY, h);
-      return h;
-    })();
-  }
-  return passHashPromise;
+async function getExpectedHashes() {
+  const hashes = new Set();
+  const stored = localStorage.getItem(ADMIN_PASS_KEY);
+  if (stored) hashes.add(stored);
+  if (DEFAULT_PASSWORD) hashes.add(await hashPassword(DEFAULT_PASSWORD));
+  return hashes;
 }
 
 function hashPassword(pw) {
@@ -303,9 +296,9 @@ async function handleLogin(e) {
   e.preventDefault();
   const input = document.getElementById('loginPass');
   const val = input.value;
-  const expected = await ensurePassHash();
+  const expected = await getExpectedHashes();
   const actual = await hashPassword(val);
-  if (actual === expected) {
+  if (expected.has(actual)) {
     sessionStorage.setItem(SESSION_KEY, '1');
     input.value = '';
     document.getElementById('loginError').hidden = true;
@@ -345,9 +338,9 @@ async function changePassword() {
     return;
   }
 
-  const expected = await ensurePassHash();
+  const expected = await getExpectedHashes();
   const actual = await hashPassword(cur);
-  if (actual !== expected) {
+  if (!expected.has(actual)) {
     msg.textContent = 'Current password is incorrect.';
     return;
   }
